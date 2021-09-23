@@ -24,7 +24,7 @@ ap.add_argument('--samples', type=int, default=100, help='Number of neighbors sa
 ap.add_argument('--repeat', type=int, default=5, help='Repeat the training and testing for N times. Default is 1.')
 ap.add_argument('--save-postfix', default='IMDB', help='Postfix for the saved model and result. Default is DBLP.')
 ap.add_argument('--feats-opt', type=str, default='011', help='010 means 1 type nodes use our processed feature')
-ap.add_argument('--feats-drop-rate', type=float, default=0.3, help='The ratio of attributes to be dropped.')
+ap.add_argument('--feats-drop-rate', type=float, default=0.7, help='The ratio of attributes to be dropped.')
 ap.add_argument('--loss-lambda', type=float, default=0.2, help='Coefficient lambda to balance loss.')
 ap.add_argument('--cuda', action='store_true', default=False, help='Using GPU or not.')
 args = ap.parse_args()
@@ -45,7 +45,7 @@ feats_opt = args.feats_opt
 is_cuda = args.cuda
 
 # random seed
-seed = 234
+seed = 123
 random.seed(seed)
 np.random.seed(seed)
 torch.manual_seed(seed)
@@ -67,7 +67,7 @@ src_node_type = 0
 
 # Params
 out_dim = 3
-dropout_rate = 0.5
+dropout_rate = 0.2
 lr = 0.005
 weight_decay = 0.001
 device = torch.device('cuda:0' if is_cuda else 'cpu')
@@ -198,3 +198,7 @@ print('Micro-F1: ' + ', '.join(['{:.6f}'.format(micro_f1) for micro_f1 in svm_mi
 print('NMI: {:.6f}'.format(nmi_avg))
 print('ARI: {:.6f}'.format(ari_avg))
 print('all finished')
+
+with open('log-IMDB-statistics.txt', 'a+') as f:
+    f.writelines('\n' + 'Macro-F1: ' + ', '.join(['{:.6f}'.format(macro_f1) for macro_f1 in svm_macro_avg]) + '\n' +
+                 'Micro-F1: ' + ', '.join(['{:.6f}'.format(micro_f1) for micro_f1 in svm_micro_avg]) + '\n')
