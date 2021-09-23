@@ -18,11 +18,11 @@ Please extract the zip file to folder `data`.
 
 We use the same methods as MAGNN to process the data, so you can also download datasets at [MAGNN's repository](https://github.com/cynricfu/MAGNN).
 ## Example
-* `python run_DBLP.py`
-* `python run_IMDB.py`
-* `python run_ACM.py`
+* `python run_DBLP.py --cuda`
+* `python run_IMDB.py --cuda`
+* `python run_ACM.py --cuda`
 
-Please refer to the code for detailed parameters.
+Please refer to the code for more parameters.
 ## Acknowledgements
 The demo code is implemented based on [MAGNN: Metapath Aggregated Graph Neural Network for Heterogeneous Graph Embedding](https://github.com/cynricfu/MAGNN).
 ## Citing
